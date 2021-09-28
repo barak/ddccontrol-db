@@ -1,13 +1,14 @@
 Source: ddccontrol-db
 Section: utils
 Priority: optional
-Maintainer: Miroslav Kravec <kravec.miroslav@gmail.com>
+Maintainer: Barak A. Pearlmutter <bap@debian.org>
 Homepage: https://github.com/ddccontrol/ddccontrol-db
 Build-Depends: debhelper-compat (= 13)
 Build-Depends-Indep: intltool
 Standards-Version: 4.6.0
-Vcs-Git: https://github.com/ddccontrol/debian-ddccontrol-db.git
-Vcs-Browser: https://github.com/ddccontrol/debian-ddccontrol-db
+Rules-Requires-Root: no
+Vcs-Git: https://salsa.debian.org/ddccontrol-team/ddccontrol-db.git
+Vcs-Browser: https://salsa.debian.org/ddccontrol-team/ddccontrol-db
 
 Package: ddccontrol-db
 Architecture: all
