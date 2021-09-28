@@ -1,10 +1,33 @@
 <?xml version="1.0"?>
 <options date="$DATE" dbversion="3">
+	<group name="Preset Modes">
+		<subgroup name="Preset">
+			<!-- Dell S2721D (DELA19A) -->
+			<control id="preset" type="list" name="Preset" refresh="all">
+				<value id="standard" name="Standard"/>
+				<value id="warm" name="Warm"/>
+				<value id="cool" name="Cool"/>
+				<value id="custom" name="Custom"/>
+			</control>
+			<control id="preset_profile" type="list" name="Profile" refresh="all">
+				<value id="off" name="Off"/>
+				<value id="comfort" name="ComfortView"/>
+				<value id="fps" name="FPS"/>
+				<value id="rts" name="RTS"/>
+				<value id="rpg" name="RPG"/>
+			</control>
+			<control id="preset_moviemode" type="list" name="Movie Mode" refresh="all">
+				<value id="off" name="Off"/>
+				<value id="movie" name="On"/>
+			</control>
+		</subgroup>
+	</group>
 	<group name="Color settings">
 		<subgroup name="Brightness and Contrast" pattern="brightnesscontrast">
 			<control id="brightness" type="value" name="Brightness" address="0x10"/>
 			<control id="contrast" type="value" name="Contrast" address="0x12"/>
 			<!--- vendor specific controls -->
+			<control id="sharpness" type="value" name="Sharpness"/>
 			<control id="dynamiccontrast" type="list" name="Dynamic Contrast">
 				<value id="off" name="Off"/>
 				<value id="on" name="On"/>
@@ -49,6 +72,24 @@
 				<value id="user" name="User" />
 				<value id="text" name="Text" />
 				<value id="movie" name="Movie" />
+			</control>
+		</subgroup>
+		<!-- sub group for modes on recent Acer monitors (e.g. ACR0692) -->
+		<subgroup name="Modes">
+			<!-- NEWLY ADDED for ACR0692-->
+			<control id="mode" type="list" name="Mode" address="0xe2">
+				<value id="user" name="User" value="0"/>
+		  		<value id="darkroom" name="DarkRoom" value="13"/>
+		  		<value id="reading" name="Reading" value="12"/>
+		  		<value id="srgb" name="sRGB" value="9"/>
+		  		<value id="standard" name="Standard" value="1"/>
+		  		<value id="eco" name="Eco" value="2"/>
+		  		<value id="graphics" name="Graphics" value="3"/>
+		  		<value id="movie" name="Movie" value="4"/>
+				<!-- VG270U P-->
+				<value id="action" name="Action" value="5"/>
+				<value id="racing" name="Racing" value="6"/>
+				<value id="sports" name="Sports" value="7"/>
 			</control>
 		</subgroup>
 <!-- Following sub group valid for LG F-Engine monitors -->
@@ -110,18 +151,32 @@
 				<value id="modeC" name="sRGB" value="0x0C"/>
 				<!-- <value id="modeD" name="Mode 0x0D" value="0x0D"/> -->
 				<value id="modeE" name="Eco" value="0x0E"/>
-				<!-- <value id="modeF" name="Mode 0x0F" value="0x0F"/> -->
-				<!-- <value id="mode10" name="Mode 0x10" value="0x10"/> -->
-				<!-- <value id="mode11" name="Mode 0x11" value="0x11"/> -->
-				<!-- <value id="mode12" name="Mode 0x12" value="0x12"/> -->
-				<!-- <value id="mode13" name="Mode 0x13" value="0x13"/> -->
-				<!-- <value id="mode14" name="Mode 0x14" value="0x14"/> -->
+				<value id="modeF" name="M-book" value="0x0F"/>
+				<value id="mode10" name="CAD/CAM" value="0x10"/>
+				<value id="mode11" name="Presentation" value="0x11"/>
+				<value id="mode12" name="User" value="0x12"/>
+				<value id="mode13" name="Low Blue Light" value="0x13"/>
+				<value id="mode14" name="Animation" value="0x14"/>
 				<value id="mode15" name="FPS1" value="0x15"/>
 				<value id="mode16" name="FPS2" value="0x16"/>
 				<value id="mode17" name="RTS" value="0x17"/>
 				<value id="mode18" name="Gamer 1" value="0x18"/>
 				<value id="mode19" name="Gamer 2" value="0x19"/>
 				<value id="mode1A" name="Gamer 3" value="0x1A"/>
+			</control>
+		</subgroup>
+		<subgroup name="LG Picture">
+			<control id="lgmode" type="list" name="Picture Mode" address="0x15" refresh="all">
+				<value id="reader" name="Reader" value="1"/>
+				<value id="colorweaknes" name="Color Weakness" value="6"/>
+				<value id="custom" name="Custom" value="11"/>
+				<value id="rtsgame" name="RTS Game" value="13"/>
+				<value id="customgame" name="Custom (Game)" value="14"/>
+				<value id="srgb" name="sRGB" value="15"/>
+				<value id="fpsgame1" name="FPS Game 1" value="28"/>
+				<value id="fpsgame2" name="FPS Game 2" value="29"/>
+				<value id="photo" name="Photo" value="32"/>
+				<value id="cinema" name="Cinema" value="48"/>
 			</control>
 		</subgroup>
 		<subgroup name="Gamma" >
@@ -145,6 +200,12 @@
 				<value id="2.4" name="2.4"/>
 				<value id="2.6" name="2.6"/>
 			</control>
+			<control id="gammamode" type="list" name="Gamma" address="0xfe" >
+				<value id="mode1" name="Mode 1"/>
+				<value id="mode2" name="Mode 2"/>
+				<value id="mode3" name="Mode 3"/>
+				<value id="mode4" name="Mode 4"/>
+			</control>
 		</subgroup>
 		<subgroup name="Color maximum level">
 			<control id="red" type="value" name="Red maximum level" address="0x16"/>
@@ -155,6 +216,24 @@
 			<control id="redblack" type="value" name="Red minimum level" address="0x6C"/>
 			<control id="greenblack" type="value" name="Green minimum level" address="0x6E"/>
 			<control id="blueblack" type="value" name="Blue minimum level" address="0x70"/>
+		</subgroup>
+		<!-- ACR0692 -->
+		<subgroup name="6-axis Hue">
+			<control id="redhue" type="value" name="Red Hue"/>
+			<control id="greenhue" type="value" name="Green Hue"/>
+			<control id="bluehue" type="value" name="Blue Hue"/>
+			<control id="yellowhue" type="value" name="Yellow Hue"/>
+			<control id="magentahue" type="value" name="Magenta Hue"/>
+			<control id="cyanhue" type="value" name="Cyan Hue"/>
+		</subgroup>
+		<!-- ACR0692 -->
+		<subgroup name="6-axis Saturate">
+			<control id="redsaturate" type="value" name="Red Saturate"/>
+			<control id="greensaturate" type="value" name="Green Saturate"/>
+			<control id="bluesaturate" type="value" name="Blue Saturate"/>
+			<control id="yellowsaturate" type="value" name="Yellow Saturate"/>
+			<control id="magentasaturate" type="value" name="Magenta Saturate"/>
+			<control id="cyansaturate" type="value" name="Cyan Saturate"/>
 		</subgroup>
 		<subgroup name="Various color settings">
 			<control id="hue" type="value" name="Hue" address="0x1C"/>
@@ -204,7 +283,11 @@
 
 				<!-- DEL413A -->
 				<value id="comfort" name="ComfortView"/>
+
+				<!-- ACR06B1 -->
+				<value id="bluelight" name="Blue Light"/>
 			</control>
+			<control id="colortemp" type="value" name="Color Temperature Request"/>
 			<control id="magiccolor" type="list" name="MagicColor" address="0xF0">
 				<value id="off" name="Off"/>
 				<value id="demo" name="Demo"/>
@@ -217,10 +300,16 @@
 				<value id="off" name="Off"/>
 				<value id="calibrated" name="Calibrated"/>
 			</control>
-			<!-- DELL P2416D -->
+			<control id="uniformitycompensation" type="list" name="Uniformity Compensation">
+				<value id="off" name="Off"/>
+				<value id="calibrated" name="Calibrated"/>
+			</control>
+			<!-- Dell P2416D -->
 			<control id="dellpaper" type="command" name="Paper preset" address="0xf0">
 				<value id="set" value="0x08" name="Set Paper Preset"/>
 			</control>
+			<!-- ACR0692 -->
+			<control id="blackboost" type="value" name="Black Boost"/>
 		</subgroup>
 	</group>
 	<group name="Position and size">
@@ -276,6 +365,18 @@
 		</subgroup>
 		<subgroup name="Rotation">
 			<control id="tilt" type="value" name="Rotation (Tilt)" address="0x44"/>
+			<control id="screenorientation" type="list" name="Screen Orientation" address="0xAA">
+				<value id="landscape" name="Landscape (0 degrees)" value="0x01"/>
+				<value id="portrait" name="Portrait (90 degrees)" value="0x02"/>
+				<value id="cannotsupply" name="Display cannot suply orientation" value="0xFF"/>
+			</control>
+		</subgroup>
+	<subgroup name="Ratio">
+			<control id="ratio" type="list" name="Screen ratio" address="0xF5">
+				<value id="1to1" name="1:1" value="0"/>
+				<value id="wide" name="Wide" value="1"/>
+				<value id="original" name="Original" value="2"/>
+			</control>
 		</subgroup>
 	</group>
 	<group name="Screen purity">
@@ -322,12 +423,15 @@
 				<value id="analog" name="Analog"/>
 				<value id="digital" name="Digital"/>
 				<value id="dp" name="DisplayPort"/>
+				<value id="dp1" name="DP-1"/>
+				<value id="dp2" name="DP-2"/>
 				<value id="dvi" name="DVI"/>
 				<value id="dvi1" name="DVI-1"/>
 				<value id="dvi2" name="DVI-2"/>
 				<value id="hdmi" name="HDMI"/>
 				<value id="hdmi1" name="HDMI-1"/>
 				<value id="hdmi2" name="HDMI-2"/>
+				<value id="hdmi3" name="HDMI-3"/>
 				<value id="hdmi-mhl" name="HDMI (MHL)"/>
 				<value id="mdp" name="mDP"/>
 				<value id="vga" name="VGA"/>
@@ -346,6 +450,8 @@
 				<value id="analog" name="Analog"/>
 				<value id="digital" name="Digital"/>
 				<value id="dp" name="DisplayPort"/>
+				<value id="dp1" name="DP-1"/>
+				<value id="dp2" name="DP-2"/>
 				<value id="dvi" name="DVI"/>
 				<value id="dvi1" name="DVI-1"/>
 				<value id="dvi2" name="DVI-2"/>
@@ -383,6 +489,10 @@
 				<value id="mute" name="Mute"/>
 				<value id="normal" name="Normal"/>
 			</control>
+			<control id="audiospeakermute" type="list" name="Audio Speaker Mute" address="0x8d">
+				<value id="mute" name="Mute" value="1"/>
+				<value id="unmute" name="Unmute" value="2"/>
+			</control>
 		</subgroup>
 		<subgroup name="Degauss">
 			<control id="degauss" type="command" name="Degauss" address="0x00"/>
@@ -401,12 +511,16 @@
 			<control id="osdorientation" type="list" name="OSD Orientation" address="0xaa">
 				<value id="landscape" name="Landscape"/>
 				<value id="portrait" name="Portrait"/>
+				<value id="portraitleft" name="Portrait (Left)"/>
+				<value id="portraitright" name="Portrait (Right)"/>
 			</control>
 			<control id="language" type="list" name="Language select" address="0x68">
 				<value id="english"       name="English"/>
 				<value id="french"        name="Français (French)"/>
+				<value id="finnish"       name="Suomi (Finnish)"/>
 				<value id="german"        name="Deutsch (German)"/>
 				<value id="italian"       name="Italiano (Italian)"/>
+				<value id="korean"        name="한국어 (Korean)"/>
 				<value id="spanish"       name="Castellano (Spanish)"/>
 				<value id="russian"       name="Русский (Russian)"/>
 				<value id="swedish"       name="Svenska (Swedish)"/>
@@ -421,11 +535,14 @@
 				<value id="portuguese"    name="Português (Portuguese)"/>
 				<value id="serbocroatian" name="SiGC/BiH/CRO (Serbo-Croatian)"/>
 				<value id="hindi"         name="हिन्दी (India)"/>
+				<value id="finnish" name="Suomalainen (Finnish)"/>
+				<value id="turkish" name="Türk (Turkish)"/>
+				<value id="brazilian"    name="Português do Brasil (Brazilian Portuguese)"/>
 			</control>
 			<!-- If "changed", read 0x52 register value to get address of the control changed using OSD menu -->
-			<control id="newcontrolvalue" type="list" name="New Control Value">
-				<value id="nochanges" name="No changes"/>
-				<value id="changed" name="Some values changed"/>
+			<control id="newcontrolvalue" type="list" name="New Control Value" address="0x02">
+				<value id="nochanges" name="No changes" value="0x01"/>
+				<value id="changed" name="Some values changed" value="0x02"/>
 			</control>
 		</subgroup>
 		<subgroup name="Power control">
@@ -437,6 +554,15 @@
 			<control id="power" type="list" name="Power control" address="0xe1">
 				<value id="off" name="Off"/>
 				<value id="standby" name="Standby"/>
+				<value id="on" name="On"/>
+			</control>
+			<control id="energysaving" type="list" name="Smart Energy Saving" address="0xF6">
+				<value id="off" name="Off"/>
+				<value id="low" name="Low"/>
+				<value id="high" name="High"/>
+			</control>
+			<control id="energysaving2" type="list" name="Force energy saving" address="0xe0">
+				<value id="off" name="Off"/>
 				<value id="on" name="On"/>
 			</control>
 		</subgroup>
@@ -460,6 +586,25 @@
 				<value id="3"   name="3"/>
 				<value id="4"   name="4"/>
 			</control>
+			<control id="buttonaccess" type="list" name="Button Access">
+				<value id="locked" name="Locked"/>
+				<value id="unlocked" name="Unlocked"/>
+			</control>
+		</subgroup>
+		<subgroup name="Game Adjust">
+			<control id="freesync" type="list" name="FreeSync" address="0xF8">
+				<value id="off" name="Off" value="0"/>
+				<value id="on" name="On" value="1"/>
+				<value id="base" name="Base" value="2"/>
+				<value id="extended" name="Extended" value="3"/>
+			</control>
+			<control id="responsetime" type="list" name="Response Time" address="0xF7">
+				<value id="off" name="Off" value="0"/>
+				<value id="high" name="High" value="1"/>
+				<value id="middle" name="Middle" value="2"/>
+				<value id="low" name="Low" value="3"/>
+			</control>
+			<control id="blackstabilization" type="value" name="Black Stabilization" address="0xf9" />
 		</subgroup>
 	</group>
 </options>
