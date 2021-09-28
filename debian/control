@@ -5,7 +5,7 @@ Maintainer: Miroslav Kravec <kravec.miroslav@gmail.com>
 Homepage: https://github.com/ddccontrol/ddccontrol-db
 Build-Depends: debhelper-compat (= 13)
 Build-Depends-Indep: intltool
-Standards-Version: 4.4.0
+Standards-Version: 4.6.0
 Vcs-Git: https://github.com/ddccontrol/debian-ddccontrol-db.git
 Vcs-Browser: https://github.com/ddccontrol/debian-ddccontrol-db
 
