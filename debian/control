@@ -5,12 +5,13 @@ Maintainer: Miroslav Kravec <kravec.miroslav@gmail.com>
 Homepage: https://github.com/ddccontrol/ddccontrol-db
 Build-Depends: debhelper (>= 11)
 Build-Depends-Indep: intltool
-Standards-Version: 4.1.4
+Standards-Version: 4.4.0
 Vcs-Git: https://github.com/ddccontrol/debian-ddccontrol-db.git
 Vcs-Browser: https://github.com/ddccontrol/debian-ddccontrol-db
 
 Package: ddccontrol-db
 Architecture: all
+Multi-Arch: foreign
 Depends: ${misc:Depends}
 Recommends: ddccontrol
 Description: monitor database for ddccontrol
