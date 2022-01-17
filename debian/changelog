@@ -1,8 +1,9 @@
-ddccontrol-db (20210812-2) UNRELEASED; urgency=medium
+ddccontrol-db (20220117-1) unstable; urgency=medium
 
   * Update packaging repo in debian/control
+  * New upstream release
 
- -- Barak A. Pearlmutter <bap@debian.org>  Thu, 14 Oct 2021 17:30:58 +0100
+ -- Barak A. Pearlmutter <bap@debian.org>  Mon, 17 Jan 2022 17:59:31 +0000
 
 ddccontrol-db (20210812-1) unstable; urgency=medium
 
