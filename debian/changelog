@@ -1,3 +1,9 @@
+ddccontrol-db (20220903-2) unstable; urgency=medium
+
+  * Switch debian/watch to upstream git repo tags
+
+ -- Barak A. Pearlmutter <bap@debian.org>  Mon, 19 Dec 2022 20:52:14 +0000
+
 ddccontrol-db (20220903-1) unstable; urgency=medium
 
   * New upstream version
