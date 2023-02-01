@@ -1,3 +1,10 @@
+ddccontrol-db (20230124-1) unstable; urgency=medium
+
+  * New upstream version
+  * Update standards version to 4.6.2, no changes needed.
+
+ -- Barak A. Pearlmutter <bap@debian.org>  Wed, 01 Feb 2023 20:48:55 -0000
+
 ddccontrol-db (20220903-2) unstable; urgency=medium
 
   * Switch debian/watch to upstream git repo tags
