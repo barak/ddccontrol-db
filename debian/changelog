@@ -1,3 +1,9 @@
+ddccontrol-db (20230911-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Barak A. Pearlmutter <bap@debian.org>  Mon, 11 Sep 2023 20:02:16 +0100
+
 ddccontrol-db (20230821-1) unstable; urgency=medium
 
   * New upstream version
