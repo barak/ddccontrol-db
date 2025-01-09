@@ -1,3 +1,11 @@
+ddccontrol-db (20250106-1) unstable; urgency=medium
+
+  * New upstream version
+  * Bump policy
+  * Update scripts (explicit package prefix on debian/*.docs, rm debian/dirs)
+
+ -- Barak A. Pearlmutter <bap@debian.org>  Thu, 09 Jan 2025 08:14:57 +0000
+
 ddccontrol-db (20240920-1) unstable; urgency=medium
 
   * New upstream version
