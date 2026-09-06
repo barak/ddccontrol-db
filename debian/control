@@ -2,7 +2,7 @@ Source: ddccontrol-db
 Section: utils
 Maintainer: Barak A. Pearlmutter <bap@debian.org>
 Homepage: https://github.com/ddccontrol/ddccontrol-db
-Build-Depends: debhelper-compat (= 13)
+Build-Depends: debhelper-compat (= 14)
 Build-Depends-Indep: intltool
 Standards-Version: 4.7.4
 Vcs-Git: https://salsa.debian.org/debian/ddccontrol-db.git

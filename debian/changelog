@@ -1,3 +1,10 @@
+ddccontrol-db (20260902-1) unstable; urgency=medium
+
+  * New upstream version
+  * Debhelper 14
+
+ -- Barak A. Pearlmutter <bap@debian.org>  Sun, 06 Sep 2026 20:09:23 +0100
+
 ddccontrol-db (20260813-1) unstable; urgency=medium
 
   * Update debian/watch to uscan v5 format
