@@ -56,6 +56,10 @@ jobs:
             libxml-parser-perl \
             make
 
+      - name: Build the pinned CBOR generator
+        id: generator
+        uses: ./.github/actions/build-dbgen
+
       - name: Build and validate
         run: |
           set -euo pipefail
@@ -83,12 +87,15 @@ jobs:
           make -j"$(nproc)"
           make check
           make check-controls
+          make check-cbor
 
       - name: Test staged installation
         run: |
           set -euo pipefail
           stage="$(mktemp -d)"
           make install DESTDIR="$stage"
+          test -f "$stage/usr/share/ddccontrol-db/ddccontrol-db.cbor"
+          test -f "$stage/usr/share/ddccontrol-db/ddccontrol-db.snapshot"
           test -f "$stage/usr/share/ddccontrol-db/options.xml"
           test -f "$stage/usr/share/ddccontrol-db/monitor/VESA.xml"
           test -f "$stage/usr/share/locale/fr/LC_MESSAGES/ddccontrol-db.mo"
@@ -127,8 +134,15 @@ jobs:
           (
             cd "$source_dir"
             ./configure --prefix=/usr
-            make MSGFMT=false
-            make MSGFMT=false install DESTDIR="$stage"
+            make MSGFMT=false DDCDBGEN=false
+            make MSGFMT=false DDCDBGEN=false install DESTDIR="$stage"
+            rm db/monitor/VESA.xml
+            if make DDCDBGEN=false; then
+              echo "deleted source did not invalidate generated CBOR" >&2
+              exit 1
+            fi
+            test ! -f db/ddccontrol-db.cbor
+            test ! -f db/ddccontrol-db.snapshot
           )
           test -f "$stage/usr/share/ddccontrol-db/options.xml"
           test -f "$stage/usr/share/locale/fr/LC_MESSAGES/ddccontrol-db.mo"
@@ -190,6 +204,7 @@ jobs:
             bmake
             bmake check
             bmake check-controls
+            bmake check-cbor
             stage="$(mktemp -d)"
             bmake install \
               prefix=/usr \
@@ -204,3 +219,23 @@ jobs:
             bmake dist-gzip
             test "$(tar -tzf "ddccontrol-db-$(< VERSION).tar.gz" | grep -c '/po/.*\.gmo$')" -eq 6
           )
+
+      - name: Test the pinned producer and shared format
+        working-directory: .ci/ddccontrol-dbgen
+        env:
+          RUST_TOOLCHAIN: ${{ steps.generator.outputs.toolchain }}
+          DDCCONTROL_DB_TEST_DATADIR: ${{ github.workspace }}/db
+          CARGO_TARGET_DIR: ${{ github.workspace }}/.ci/ddccontrol-dbgen/target
+        run: |
+          cargo +"$RUST_TOOLCHAIN" test --locked -p ddccontrol-dbgen -p ddccontrol-db-format
+
+      - name: Compare XML and CBOR runtime behavior for every profile
+        working-directory: .ci/ddccontrol-dbgen
+        env:
+          RUST_TOOLCHAIN: ${{ steps.generator.outputs.toolchain }}
+          DDCCONTROL_DB_TEST_DATADIR: ${{ github.workspace }}/db
+          DDCCONTROL_DB_CONVERTER: ${{ github.workspace }}/.ci/ddccontrol-dbgen/target/release/ddccontrol-dbgen
+          CARGO_TARGET_DIR: ${{ github.workspace }}/.ci/ddccontrol-dbgen/target
+        run: |
+          cargo +"$RUST_TOOLCHAIN" test --locked -p ddccontrol-db --features gettext \
+            whole_database_xml_cbor_semantics_match_when_configured -- --nocapture
