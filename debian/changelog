@@ -1,3 +1,12 @@
+ddccontrol-db (20260928-1) unstable; urgency=medium
+
+  * New upstream version
+  * Build-depend on ddccontrol-dbgen, now used to generate and ship the
+    CBOR database alongside the XML one, and run its CBOR checks
+  * Build-depend on gettext rather than intltool
+
+ -- Barak A. Pearlmutter <bap@debian.org>  Mon, 12 Oct 2026 13:18:41 +0100
+
 ddccontrol-db (20260922-1) unstable; urgency=medium
 
   * New upstream version

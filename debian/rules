@@ -2,3 +2,8 @@
 
 %:
 	dh $@
+
+execute_after_dh_auto_test:
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+	$(MAKE) check-cbor
+endif
