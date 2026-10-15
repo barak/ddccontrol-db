@@ -3,7 +3,9 @@
 %:
 	dh $@
 
+# Skip the upstream CBOR checks that need Git, so the build neither
+# needs Git nor behaves differently when it happens to be installed.
 execute_after_dh_auto_test:
 ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
-	$(MAKE) check-cbor
+	DDCCONTROL_DB_SKIP_GIT_TESTS=1 $(MAKE) check-cbor
 endif
