@@ -1,3 +1,10 @@
+ddccontrol-db (20261015-1) unstable; urgency=medium
+
+  * New upstream version
+  * Remove upstreamed patch
+
+ -- Barak A. Pearlmutter <bap@debian.org>  Sun, 18 Oct 2026 17:05:09 +0100
+
 ddccontrol-db (20260928-2) unstable; urgency=medium
 
   * Skip the upstream CBOR build checks that need git, which is not
